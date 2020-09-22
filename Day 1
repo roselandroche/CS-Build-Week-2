@@ -1,0 +1,155 @@
+1
+
+You are given a string containing characters  and  only. Your task is to change it into a string such that there are no matching adjacent characters. To do this, you are allowed to delete zero or more characters in the string.
+
+Your task is to find the minimum number of required deletions.
+
+For example, given the string , remove an  at positions  and  to make  in  deletions.
+
+Function Description
+
+Complete the alternatingCharacters function in the editor below. It must return an integer representing the minimum number of deletions to make the alternating string.
+
+alternatingCharacters has the following parameter(s):
+
+s: a string
+Input Format
+
+The first line contains an integer , the number of queries.
+The next  lines each contain a string .
+
+Constraints
+
+Each string  will consist only of characters  and 
+Output Format
+
+For each query, print the minimum number of deletions required on a new line.
+
+Sample Input
+
+5
+AAAA
+BBBBB
+ABABABAB
+BABABA
+AAABBB
+Sample Output
+
+3
+4
+0
+0
+4
+Explanation
+
+The characters marked red are the ones that can be deleted so that the string doesn't have matching consecutive characters.
+
+SOLUTION
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the alternatingCharacters function below.
+def alternatingCharacters(s):
+    split_s = str(s).split()
+    
+    for i in split_s:
+        del_count = 0
+        prev_char = ''
+        for j in i:
+            if j == prev_char:
+                del_count = del_count + 1
+                prev_char = j
+            else:
+                prev_char = j
+        return(del_count)
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(input())
+
+    for q_itr in range(q):
+        s = input()
+
+        result = alternatingCharacters(s)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+---------------------------------------------------------------
+2
+
+Given an array of integers, find if the array contains any duplicates.
+
+Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
+
+SOLUTION
+
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        
+        singles = set()
+        
+        for i in nums:
+            if i in singles:
+                return True
+            else:
+                singles.add(i)
+                
+        return False
+
+-----------------------------------------------------------------------
+3
+
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+SOLUTION
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        l1_arr = []
+        current_1 = l1
+        while current_1:
+            l1_arr.insert(0, str(current_1.val))
+            current_1 = current_1.next
+        l1_num = int("".join(l1_arr))
+            
+        l2_arr = []
+        current_2 = l2
+        while current_2:
+            l2_arr.insert(0, str(current_2.val))
+            current_2 = current_2.next
+        l2_num = int("".join(l2_arr))
+            
+        combined = l1_num + l2_num
+        str_combined = str(combined)
+        rev_combined = reversed(str_combined)
+        
+        result = None
+        for i in rev_combined:
+            if result is None:
+                result = ListNode(i)
+            elif result is not None:
+                current = result
+                while current.next:
+                    current = current.next
+                current.next = ListNode(i)
+        return result
+            
+        
+        
