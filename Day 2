@@ -1,0 +1,37 @@
+1
+
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+You can return the answer in any order.
+
+SOLUTION
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        poss_sol = {}
+        sol = []
+        
+        for i in range(len(nums)):
+            poss_sol[i] = (target - nums[i])
+        
+        for key, value in poss_sol.items():
+            if value in nums:
+                if key is not nums.index(value):
+                    sol.append(key)
+                    sol.append(nums.index(value))
+        return sol[:2]
+
+------------------------------------------------------------------------
+2
+
+Implement the following operations of a queue using stacks.
+
+push(x) -- Push element x to the back of queue.
+pop() -- Removes the element from in front of queue.
+peek() -- Get the front element.
+empty() -- Return whether the queue is empty.
+
+SOLUTION
+
